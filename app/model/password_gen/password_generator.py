@@ -1,6 +1,6 @@
-from password_gen.violations import Violations
-from password_gen.config_json import ConfigJson
-from password_gen.allowed_characters import AllowedCharacters
+from model.password_gen.violations import Violations
+from model.password_gen.config_json import ConfigJson
+from model.password_gen.allowed_characters import AllowedCharacters
 
 import secrets
 

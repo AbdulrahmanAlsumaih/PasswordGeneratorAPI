@@ -1,10 +1,8 @@
 from typing import Optional
 
 from fastapi import FastAPI
+from router import genrate
 
 app = FastAPI()
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "Password Generator"}
+app.include_router(genrate.router)
