@@ -1,6 +1,6 @@
 # PasswordGeneratorAPI
 
-PasswordGeneratorAPI is a Python library to generate secure password using FastAPI
+PasswordGeneratorAPI is REST API using FastAPI to generate random passwords that meet requirements that the user defines in POST requests.
 
 ## Installation
 
@@ -10,8 +10,39 @@ PasswordGeneratorAPI is a Python library to generate secure password using FastA
 
 ## Usage
 
-```python
+```json
+{
+  "length": 12,
 
+  "allowed_characters": {
+    "groups": {
+      "special": "!@#$%&*()[]{}"
+    },
+    "constants": {
+      "lowercase": "ascii_lowercase",
+      "uppercase": "ascii_uppercase",
+      "numbers": "digits"
+    }
+  },
+
+  "required_characters": [
+    [1, "group", "special"],
+    [2, "constant", "uppercase"],
+    [2, "constant", "lowercase"],
+    [2, "constant", "numbers"]
+  ],
+
+  "violations": {
+    "consecutive": 2,
+    "occurrence": 2,
+    "sequential": [
+      [3, "constant", "numbers"],
+      [3, "constant", "uppercase"],
+      [3, "constant", "lowercase"]
+    ],
+    "verboten": ["password", "topsecret", "foobar", "spam"]
+  }
+}
 ```
 
 ## Contributing

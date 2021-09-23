@@ -53,5 +53,5 @@ async def read_users(item: Item):
     password = PasswordGenerator(item)
     pass_gen = password.new()
 
-    results = {"item": pass_gen}
+    results = {"password_gen": pass_gen}
     return results
