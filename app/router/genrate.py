@@ -26,18 +26,14 @@ class ItemSequential(BaseModel):
                              [3, "constant", "lowercase"]]]
 
 
-class ItemVerboten(BaseModel):
-    constants: Set[str] = ["password",
-                           "topsecret",
-                           "foobar",
-                           "spam"]
-
-
 class ItemViolations(BaseModel):
     consecutive: str = 2
     occurrence: str = 2
     sequential: Optional[ItemSequential]
-    verboten: ItemVerboten
+    verboten: Set[str] = ["password",
+                          "topsecret",
+                          "foobar",
+                          "spam"]
 
 
 class Item(BaseModel):
