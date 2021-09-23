@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  fast-api:
+    container_name: PasswordGeneratorAPI
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/:/app
+    ports:
+      - "80:80"
+    environment:
+      - PORT=80
+    entrypoint: /start-reload.sh
