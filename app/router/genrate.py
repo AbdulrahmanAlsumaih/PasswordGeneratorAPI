@@ -20,16 +20,12 @@ class ItemAllowed(BaseModel):
     constants: ItemConstant
 
 
-class ItemSequential(BaseModel):
-    sequential: Set[str] = [[[3, "constant", "numbers"],
-                             [3, "constant", "uppercase"],
-                             [3, "constant", "lowercase"]]]
-
-
 class ItemViolations(BaseModel):
     consecutive: str = 2
     occurrence: str = 2
-    sequential: Optional[ItemSequential]
+    sequential: list = [[[3, "constant", "numbers"],
+                        [3, "constant", "uppercase"],
+                        [3, "constant", "lowercase"]]]
     verboten: Set[str] = ["password",
                           "topsecret",
                           "foobar",
@@ -39,7 +35,7 @@ class ItemViolations(BaseModel):
 class Item(BaseModel):
     length: Optional[str] = 12
     allowed_characters: ItemAllowed
-    required_characters: Set[str] = [
+    required_characters: list = [
         [1, "group", "special"],
         [2, "constant", "uppercase"],
         [2, "constant", "lowercase"],
@@ -50,12 +46,11 @@ class Item(BaseModel):
 # password = PasswordGenerator(a)
 # pass_gen = password.new()
 
-a = 'Pass'
 
 router = APIRouter()
 
 
 @router.post("/")
 async def read_users(item: Item):
-
-    return "jsonable_encoder(ItemGroup)"
+    results = {"item": item}
+    return results
