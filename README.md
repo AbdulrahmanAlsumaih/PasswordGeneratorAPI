@@ -81,7 +81,7 @@ The `[int, string, string]` pattern is always `[count, group_type, group]`. The
 `group_type` will always be either `group` or `constant`, with the same meanings
 of those terms as is found in the `allowed_characters` section.
 
-If some element of the `violations` section is not provided in the config JSON,
+If some element of the `violations` section is not provided in the POST request,
 or if it is defined as `null`, that element has no rule to enforce.
 
 ### Here's an example of a `violations` section.
@@ -96,7 +96,7 @@ In plain English, here are some example violation requirements.
          ("123" is wrong, "765" is wrong, "465" is OK)
     * The substring "password"
 
-In the config file, these would be defined:
+In the POST request, these would be defined:
 
 ```json
 {
@@ -111,6 +111,33 @@ In the config file, these would be defined:
             "password"
         ]
     }
+}
+```
+
+## Example
+
+Here is an example to construct Json file from user requirement
+
+```json
+{
+  "allowed_characters": {
+    "groups": {
+      "numbers": "0123456789",
+      "lowercase": "abcdefghijklmnopqrstuvwxyz",
+      "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    }
+  },
+
+  "required_characters": [
+    [2, "group", "numbers"],
+    [1, "group", "uppercase"]
+  ],
+
+  "violations": {
+    "consecutive": 2,
+    "occurrence": 3,
+    "verboten": ["password", "topsecret", "foobar", "spam"]
+  }
 }
 ```
 
