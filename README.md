@@ -4,8 +4,16 @@ PasswordGeneratorAPI is REST API using FastAPI to generate random passwords that
 
 ## Installation
 
-```bash
+Install docker in your machine [docker](https://docs.docker.com/get-docker/). Please
+visit the website for more information.
 
+Install Docker Compose in your machine [Docker Compose](https://docs.docker.com/compose/
+install/). Please visit the website for more information.
+
+- after install docker and Docker Compose, run this command
+
+```bash
+docker compose up
 ```
 
 ## Usage
