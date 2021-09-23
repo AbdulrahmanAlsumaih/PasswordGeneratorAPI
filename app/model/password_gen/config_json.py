@@ -4,11 +4,11 @@ import json
 class ConfigJson:
 
     def __init__(self, config: str):
-        self.config = json.loads(config)
+
+        self.config = config
 
     def length(self):
-
-        return self.config.get("length")
+        return int(self.config.get("length"))
 
     def allowed_characters(self):
 

@@ -1,6 +1,7 @@
 from model.password_gen.violations import Violations
 from model.password_gen.config_json import ConfigJson
 from model.password_gen.allowed_characters import AllowedCharacters
+from fastapi.encoders import jsonable_encoder
 
 import secrets
 
@@ -9,10 +10,9 @@ class PasswordGenerator:
 
     def __init__(self, config: str):
 
-        self.config = config
+        self.config = jsonable_encoder(config)
 
     def new(self) -> str:
-
         config = ConfigJson(self.config)
         length = config.length()
         if length == None:
@@ -22,6 +22,7 @@ class PasswordGenerator:
             config.allowed_characters(), config.required_characters())
 
         all = allow.allowed_characters()
+        print(length)
 
         while True:
             password = ''.join(secrets.choice(all) for i in range(length))

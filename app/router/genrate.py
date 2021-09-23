@@ -4,6 +4,8 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import Optional, Set
 
+router = APIRouter()
+
 
 class ItemGroup(BaseModel):
     special: str = "!@#$%&*()[]{}"
@@ -23,9 +25,9 @@ class ItemAllowed(BaseModel):
 class ItemViolations(BaseModel):
     consecutive: str = 2
     occurrence: str = 2
-    sequential: list = [[[3, "constant", "numbers"],
+    sequential: list = [[3, "constant", "numbers"],
                         [3, "constant", "uppercase"],
-                        [3, "constant", "lowercase"]]]
+                        [3, "constant", "lowercase"]]
     verboten: Set[str] = ["password",
                           "topsecret",
                           "foobar",
@@ -43,14 +45,13 @@ class Item(BaseModel):
     violations: ItemViolations
 
 
-# password = PasswordGenerator(a)
-# pass_gen = password.new()
-
-
 router = APIRouter()
 
 
 @router.post("/")
 async def read_users(item: Item):
-    results = {"item": item}
+    password = PasswordGenerator(item)
+    pass_gen = password.new()
+
+    results = {"item": pass_gen}
     return results
